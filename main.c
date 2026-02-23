@@ -72,6 +72,13 @@ int main(int argc, char* argv[]){
 
     printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
  
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image-width, image->height, 
+            0, GL_RGB, GL_UNSIGNED_BYTE, image->data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
     // Main Program Loop
     while (!glfwWindowShouldClose(window)){
 
