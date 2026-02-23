@@ -15,8 +15,21 @@
 #define WINDOW_WIDTH  900
 #define WINDOW_HEIGHT 600
 
-int main(){
+int main(int argc, char* argv[]){
+    FILE* fptr;
 
+    if (argc < 2){
+        printf("usage: %s [image-file] ...\n", argv[0]);
+        return EXIT_FAILURE;
+    } else {
+        fptr = fopen(argv[1], "r");
+        if (!fptr){
+            printf("Could not load file: %s...\n", argv[1]);
+            return EXIT_FAILURE;
+        }
+    }
+    
+    // Initialize glfw
     if (!glfwInit()){
         printf("Failed to initialize GLFW\n");
         return EXIT_FAILURE;
@@ -45,5 +58,13 @@ int main(){
 
     printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
  
+    // Main Program Loop
+    while (!glfwWindowShouldClose(window)){
+
+        glfwPollEvents();
+    }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
     return 0;
 }
