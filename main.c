@@ -4,7 +4,7 @@
  * The program allows the user to specify a .ppm image file
  * and displays it in a window.
  *
- * build options:
+ * build options for macos:
  *      gcc main.c -o test \
  *      `pkg-config --cflags glfw3 glew` \
  *      `pkg-config --libs glfw3 glew` \
@@ -17,8 +17,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#define WINDOW_WIDTH  900
-#define WINDOW_HEIGHT 600
+int WINDOW_WIDTH  = 900;
+int WINDOW_HEIGHT = 600;
 
 typedef struct {
     int width, height;
@@ -203,6 +203,8 @@ PPMImage* loadPPM(const char* filename){
     }
     
     fscanf(f, "%d %d", &width, &height);
+    WINDOW_WIDTH = width;
+    WINDOW_HEIGHT = height;
     fscanf(f, "%d", &maxval);
 
     if (maxval != 255){
